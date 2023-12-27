@@ -1,0 +1,17 @@
+{
+  "name": "jaxel",
+  "version": "1.0.0",
+  "description": "Mini webtool to convert CSV to JSON and vice-versa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Keshav Priyam",
+  "license": "ISC",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "exceljs": "^4.4.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

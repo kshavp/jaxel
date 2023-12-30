@@ -4,15 +4,22 @@
   "description": "Mini webtool to convert CSV to JSON and vice-versa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/app.js",
+    "build": "rimraf dist && npx tsc",
+    "dev": "npx tsc -w & nodemon dist/index.js"
   },
   "author": "Keshav Priyam",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
     "csvtojson": "^2.0.10",
     "exceljs": "^4.4.0",
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
   }
 }

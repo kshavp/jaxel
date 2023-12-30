@@ -6,6 +6,9 @@
     <title>Jaxel</title>
 </head>
 <body>
-    <h1>Jaxel Running</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="csvFile" accept=".csv" required>
+        <button type="submit">Upload CSV</button>
+    </form>
 </body>
 </html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CSV Table</h1>
+    <table border="1">
+        <% tableData.forEach((row) => { %>
+            <tr>
+                <% Object.values(row).forEach((value) => { %>
+                    <td><%= value %></td>
+                <% }); %>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>

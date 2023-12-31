@@ -33,8 +33,11 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
         .on('end', () => {
             
             console.log(tableData);   
-            res.render('table.ejs', { tableData });
             
+            const jsonFilePath = path.join(__dirname, '../outfile/','output.json');
+            fs.writeFileSync(jsonFilePath, JSON.stringify(tableData, null, 2));
+            
+            res.render('table.ejs', { tableData });
             fs.unlinkSync(uploadedFilePath);
         });
 

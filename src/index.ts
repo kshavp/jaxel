@@ -23,18 +23,19 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
     }
 
     const uploadedFilePath:string = req.file.path;
-
+    const origName:string = req.file.originalname;
+    const outputFileName:string = origName.split('.')[0];
     const tableData: any[] = [];
     fs.createReadStream(uploadedFilePath)
         .pipe(csvParser())
-        .on('data', (data) => {            
+        .on('data', (data) => {
+            console.log(req.file);   
+            console.log(uploadedFilePath);
             tableData.push(data);
         })
         .on('end', () => {
             
-            console.log(tableData);   
-            
-            const jsonFilePath = path.join(__dirname, '../outfile/','output.json');
+            const jsonFilePath = path.join(__dirname, `../outfile/',${outputFileName}.json`);
             fs.writeFileSync(jsonFilePath, JSON.stringify(tableData, null, 2));
             
             res.render('table.ejs', { tableData });

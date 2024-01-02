@@ -7,14 +7,9 @@
 </head>
 <body>
     <h1>CSV Table</h1>
-    <table border="1">
-        <% tableData.forEach((row) => { %>
-            <tr>
-                <% Object.values(row).forEach((value) => { %>
-                    <td><%= value %></td>
-                <% }); %>
-            </tr>
-        <% }); %>
-    </table>
+    
+    <form action="/download" method="post">
+        <input type="submit" name="<%=jsonFilePath%>" value= "Download <%=jsonFilePath%>"/>
+    </form>
 </body>
 </html>

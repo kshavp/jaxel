@@ -1,0 +1,9 @@
+<table border="1">
+        <% tableData.forEach((row) => { %>
+            <tr>
+                <% Object.values(row).forEach((value) => { %>
+                    <td><%= value %></td>
+                <% }); %>
+            </tr>
+        <% }); %>
+    </table>

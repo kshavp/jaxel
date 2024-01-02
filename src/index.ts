@@ -8,6 +8,9 @@ const app:Express = express();
 const upload = multer({ dest: 'uploads/' });
 const PORT = 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 
@@ -24,13 +27,16 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
 
     const uploadedFilePath:string = req.file.path;
     const origName:string = req.file.originalname;
-    const outputFileName:string = origName.split('.')[0];
+    
+    const outputFileName:string = path.parse(origName).name;
+    console.log(outputFileName);
+    
     const tableData: any[] = [];
     fs.createReadStream(uploadedFilePath)
         .pipe(csvParser())
         .on('data', (data) => {
-            console.log(req.file);   
-            console.log(uploadedFilePath);
+            // console.log(req.file);   
+            // console.log(uploadedFilePath);
             tableData.push(data);
         })
         .on('end', () => {
@@ -38,10 +44,17 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
             const jsonFilePath = path.join(__dirname, `../outfile/',${outputFileName}.json`);
             fs.writeFileSync(jsonFilePath, JSON.stringify(tableData, null, 2));
             
-            res.render('table.ejs', { tableData });
+            // res.render('table.ejs', { tableData });
+            res.render('table.ejs', {jsonFilePath});
             fs.unlinkSync(uploadedFilePath);
         });
 
+});
+
+app.post('/download',(req:Request, res:Response)=>{
+    const fileName:string = `${req.body.name}.json`;
+    console.log(fileName);
+    // res.download('../outfile/'+fileName);
 });
 
 app.listen(PORT, () => {

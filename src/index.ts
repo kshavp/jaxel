@@ -29,8 +29,7 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
     const origName:string = req.file.originalname;
     
     const outputFileName:string = path.parse(origName).name;
-    console.log(outputFileName);
-    
+        
     const tableData: any[] = [];
     fs.createReadStream(uploadedFilePath)
         .pipe(csvParser())
@@ -41,20 +40,20 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
         })
         .on('end', () => {
             
-            const jsonFilePath = path.join(__dirname, `../outfile/',${outputFileName}.json`);
+            const jsonFilePath = path.join(__dirname, `../outfile/${outputFileName}.json`);
             fs.writeFileSync(jsonFilePath, JSON.stringify(tableData, null, 2));
             
-            // res.render('table.ejs', { tableData });
-            res.render('table.ejs', {jsonFilePath});
+            res.render('table.ejs', {outputFileName});
             fs.unlinkSync(uploadedFilePath);
         });
 
 });
 
 app.post('/download',(req:Request, res:Response)=>{
-    const fileName:string = `${req.body.name}.json`;
-    console.log(fileName);
-    // res.download('../outfile/'+fileName);
+    const fileName:string = `${req.body.jsonFileName}.json`;
+    const jsonFilePath = path.join(__dirname, `../outfile/${fileName}`);
+    res.download(jsonFilePath);
+    // fs.unlinkSync(jsonFilePath); 03-01-24
 });
 
 app.listen(PORT, () => {

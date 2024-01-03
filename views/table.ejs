@@ -9,7 +9,10 @@
     <h1>CSV Table</h1>
     
     <form action="/download" method="post">
-        <input type="submit" name="<%=jsonFilePath%>" value= "Download <%=jsonFilePath%>"/>
+        <input type="hidden" name="jsonFileName" value="<%= outputFileName %>" />
+        <input type="submit" value="Download JSON File" />
     </form>
+
+
 </body>
 </html>

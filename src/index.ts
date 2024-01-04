@@ -44,7 +44,7 @@ app.post('/upload', upload.single('csvFile'), (req: Request, res: Response) => {
             fs.writeFileSync(jsonFilePath, JSON.stringify(tableData, null, 2));
             
             res.render('table.ejs', {outputFileName});
-            fs.unlinkSync(uploadedFilePath);
+            // fs.unlinkSync(uploadedFilePath);
         });
 
 });

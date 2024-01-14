@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
     @apply font-sans;
-    @apply bg-slate-900;
-    @apply min-h-screen flex items-center justify-center;
-}
-
-.container {
-    @apply mx-auto px-4 max-w-screen-xl;
-}
-
-.navbar {
-    @apply bg-gray-800 text-white py-4;
-}
-
-.footer {
-    @apply bg-gray-800 text-white text-center py-2 fixed bottom-0 w-full;
 }
